@@ -10,6 +10,7 @@ import se.yrgo.Springmovies.service.MovieService;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins="*", maxAge = 3600)
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -31,6 +32,7 @@ public class MovieController {
     public List<Movie> getMoviesByGenre(@RequestBody Genre.MovieGenre genre){
         return movieService.getMoviesByGenre(genre);
     }
+
 
     @GetMapping("get-genres")
     public List<Genre.MovieGenre> getAllMovieGenres(){
