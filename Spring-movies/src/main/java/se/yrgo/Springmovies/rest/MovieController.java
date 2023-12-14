@@ -3,6 +3,7 @@ package se.yrgo.Springmovies.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.yrgo.Springmovies.domain.Genre;
 import se.yrgo.Springmovies.domain.Movie;
 import se.yrgo.Springmovies.service.MovieService;
 
@@ -27,8 +28,13 @@ public class MovieController {
     }
 
     @GetMapping("get-movies-by-genre")
-    public List<Movie> getMoviesByGenre(@RequestBody String genre){
+    public List<Movie> getMoviesByGenre(@RequestBody Genre.MovieGenre genre){
         return movieService.getMoviesByGenre(genre);
+    }
+
+    @GetMapping("get-genres")
+    public List<Genre.MovieGenre> getAllMovieGenres(){
+        return List.of(Genre.MovieGenre.values());
     }
 
     @PostMapping("/create-movie")

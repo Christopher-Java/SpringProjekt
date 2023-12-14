@@ -3,6 +3,7 @@ package se.yrgo.Springmovies.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.yrgo.Springmovies.data.MoviesRepository;
+import se.yrgo.Springmovies.domain.Genre;
 import se.yrgo.Springmovies.domain.Movie;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByGenre(String genre){
+    public List<Movie> getMoviesByGenre(Genre.MovieGenre genre){
         return moviesRepository.findMovieByGenre(genre);
     }
 

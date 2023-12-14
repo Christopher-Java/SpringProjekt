@@ -1,5 +1,6 @@
 package se.yrgo.Springmovies.service;
 
+import se.yrgo.Springmovies.domain.Genre;
 import se.yrgo.Springmovies.domain.Movie;
 
 import java.util.List;
@@ -9,6 +10,6 @@ public interface MovieService {
     List<Movie> getAllmovies();
     void createMovie(Movie movie);
     Optional<Movie> getMovie(Long id);
-    List<Movie> getMoviesByGenre(String genre);
+    List<Movie> getMoviesByGenre(Genre.MovieGenre genre);
 
 }

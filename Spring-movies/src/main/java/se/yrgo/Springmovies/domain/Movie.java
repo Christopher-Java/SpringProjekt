@@ -16,14 +16,18 @@ public class Movie {
     private String movieTitle;
     private Date releaseDate;
     private String description;
-    private String genre;
+    private Genre.MovieGenre genre;
 
-    public Movie(String movieTitle, Date releaseDate, String description, String movieGenre) {
+    public Movie(String movieTitle, Date releaseDate, String description, Genre.MovieGenre movieGenre) {
         this.movieTitle = movieTitle;
         this.releaseDate = releaseDate;
         this.description = description;
         this.genre = movieGenre;
+
+
     }
+
+
 
     @Override
     public String toString() {
@@ -64,11 +68,11 @@ public class Movie {
         this.description = description;
     }
 
-    public String getGenre() {
+    public Genre.MovieGenre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre.MovieGenre genre) {
         this.genre = genre;
     }
 
