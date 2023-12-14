@@ -1,9 +1,9 @@
-package se.yrgo.data;
+package se.yrgo.SpringRental.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import se.yrgo.domain.Rental;
+import se.yrgo.SpringRental.domain.Rental;
 
 import java.sql.Date;
 import java.util.List;

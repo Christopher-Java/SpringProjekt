@@ -1,14 +1,19 @@
-package se.yrgo.service;
+package se.yrgo.SpringRental.service;
 
-import se.yrgo.data.Rentalrepository;
-import se.yrgo.domain.Rental;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import se.yrgo.SpringRental.data.Rentalrepository;
+import se.yrgo.SpringRental.domain.Rental;
+
 
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class RentalServiceImpl implements RentalService {
 
+    @Autowired
     private Rentalrepository rentalRepository;
 
     @Override

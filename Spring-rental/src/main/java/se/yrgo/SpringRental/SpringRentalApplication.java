@@ -1,4 +1,4 @@
-package se.yrgo;
+package se.yrgo.SpringRental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
