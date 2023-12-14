@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.yrgo</groupId>
-	<artifactId>product-project</artifactId>
+	<artifactId>movie-rental-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>product-project</name>
 	<description>Demo project for Spring Boot</description>

@@ -1,6 +1,6 @@
-package se.yrgo.service;
+package se.yrgo.SpringRental.service;
 
-import se.yrgo.domain.Rental;
+import se.yrgo.SpringRental.domain.Rental;
 
 import java.sql.Date;
 import java.util.List;

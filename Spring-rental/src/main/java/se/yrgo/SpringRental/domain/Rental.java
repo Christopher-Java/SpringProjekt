@@ -1,4 +1,4 @@
-package se.yrgo.domain;
+package se.yrgo.SpringRental.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
