@@ -38,7 +38,7 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public Rental findByCustomerId(Long customerId) {
+    public List<Rental> findByCustomerId(Long customerId) {
         return rentalRepository.findCustomerById(customerId);
     }
 
