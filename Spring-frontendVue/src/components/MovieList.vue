@@ -2,9 +2,9 @@
   <div>
     <div class="row">
       <form>
-              <label for="customerId">Your customer ID</label>
-              <input v-model="customerid" class="form-control" id="customerId">
-            </form>
+        <label for="customerId">Your customer ID</label>
+        <input v-model="customerid" class="form-control" id="customerId">
+      </form>
       <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4">
         <div class="card">
           <!-- You can add images or icons for each genre if available -->
@@ -12,8 +12,8 @@
             <h5 class="card-title">{{ movie.movieTitle }}</h5>
             <p class="card-text">{{ movie.description }}</p>
 
-            
-            <button @click="rentMovie(movie)"> Rent movie </button>
+
+            <button @click="rentMovie(movie)"> Rent movie</button>
 
           </div>
         </div>
@@ -45,18 +45,25 @@ export default {
       this.movies = await response.json()
     },
     async rentMovie(movie) {
-      
+      const postData = {
+        customerId: this.customerid,
+        movieId: movie.id,
+        rentalCost: 75,
+        rentalDate: currentDate
+      };
+      var currentDate = new Date();
+
       console.log(this.customerid + " want to hire " + movie.id)
       // eslint-disable-next-line
       const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: {"movieId":movie.id, "customerId":this.customerid, "rentCost":75}
+        body: JSON.stringify(postData)
       };
-      const response = await fetch("http://localhost:8082/create-rental")
+      const response = await fetch("http://localhost:8082/rental/create-rental", requestOptions)
       const data = await response.json()
       this.postId = data.id
-      
+
     }
   },
 };
