@@ -30,8 +30,8 @@ public class MovieController {
         return movieService.getMovie(id);
     }
 
-    @GetMapping("get-movies-by-genre")
-    public List<Movie> getMoviesByGenre(@RequestBody Genre.MovieGenre genre){
+    @GetMapping("get-movies-by-genre/{genre}")
+    public List<Movie> getMoviesByGenre(@PathVariable Genre.MovieGenre genre){
         return movieService.getMoviesByGenre(genre);
     }
 

@@ -14,7 +14,7 @@
         <h2 class="h4 mb-4">Browse by Category</h2>
         <div class="row">
          
-          <GenreComponent></GenreComponent>
+          
           <!-- Add more category cards as needed -->
         </div>
       </div>
@@ -43,12 +43,14 @@
 </template>
 
 <script>
+// eslint-disable-next-line
 import GenreComponent from './components/GenreComponent.vue';
 import MovieList from './components/MovieList.vue';
 
 export default {
   name: 'App',
   components: {
+    // eslint-disable-next-line
     GenreComponent,
     MovieList
   }
