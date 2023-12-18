@@ -14,6 +14,6 @@ public interface Rentalrepository extends JpaRepository<Rental, Long> {
     List<Rental> findByDate(Date date);
 
     @Query(value = "SELECT r FROM Rental as r WHERE r.customerId = :customerId")
-    Rental findCustomerById(Long customerId);
+    List<Rental> findCustomerById(Long customerId);
 
 }

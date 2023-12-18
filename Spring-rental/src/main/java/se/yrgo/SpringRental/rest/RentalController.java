@@ -33,13 +33,13 @@ public class RentalController {
         return rentalService.findByDate(date);
     }
 
-    @GetMapping("/findById")
-    public Optional<Rental> findById(Long id) {
+    @GetMapping("/findById/{id}")
+    public Optional<Rental> findById(@PathVariable Long id) {
         return rentalService.findById(id);
     }
 
     @GetMapping("/findByCustomerId/{id}")
-    public Rental findByCustomerId(@PathVariable Long id) {
+    public List<Rental> findByCustomerId(@PathVariable Long id) {
         return rentalService.findByCustomerId(id);
     }
 

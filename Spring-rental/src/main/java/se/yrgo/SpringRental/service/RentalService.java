@@ -17,7 +17,7 @@ public interface RentalService {
 
     public Optional<Rental> findById(Long id);
 
-    public Rental findByCustomerId(Long customerId);
+    public List<Rental> findByCustomerId(Long customerId);
 
 
 }
