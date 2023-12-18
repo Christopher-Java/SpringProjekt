@@ -1,44 +1,18 @@
 // CustomerService.java
 package se.yrgo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import se.yrgo.domain.Customer;
 
 import java.util.List;
 
-@Service
-public class CustomerService {
+public interface CustomerService {
+    public List<Customer> getAllCustomers();
 
-    private final CustomerRepository customerRepository;
+    public Customer getCustomerById(Long customerId);
 
-    @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    public Customer createCustomer(Customer customer);
 
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
+    public Customer updateCustomer(Long customerId, Customer updatedCustomer);
 
-    public Customer getCustomerById(Long customerId) {
-        return customerRepository.findById(customerId).orElse(null);
-    }
-
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public Customer updateCustomer(Long customerId, Customer updatedCustomer) {
-        return customerRepository.findById(customerId)
-                .map(existingCustomer -> {
-                    existingCustomer.setName(updatedCustomer.getName());
-                    existingCustomer.setEmail(updatedCustomer.getEmail());
-                    return customerRepository.save(existingCustomer);
-                })
-                .orElse(null);
-    }
-
-    public void deleteCustomer(Long customerId) {
-        customerRepository.deleteById(customerId);
-    }
+    public void deleteCustomer(Long customerId);
 }

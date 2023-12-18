@@ -3,19 +3,16 @@ package se.yrgo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.yrgo.data.CustomerRepository;
+import se.yrgo.domain.Customer;
 
 import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepository customerRepository;
-
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
-
+    private CustomerRepository customerRepository;
     @Override
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
