@@ -1,18 +1,19 @@
 // CustomerController.java
 package se.yrgo.rest;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-@Controller
+import se.yrgo.domain.Customer;
+import se.yrgo.service.CustomerService;
+@CrossOrigin(origins="*", maxAge = 3600)
+@RestController
+@RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @GetMapping("/customers")
     public String getAllCustomers(Model model) {
