@@ -4,6 +4,7 @@ public class Genre {
     public enum MovieGenre{
         FANTASY,
         THRILLER,
-        COMEDY
+        COMEDY,
+        ACTION
     }
 }
