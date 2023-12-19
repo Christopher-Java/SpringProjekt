@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import se.yrgo.Springmovies.data.MoviesRepository;
 import se.yrgo.Springmovies.domain.Genre;
 import se.yrgo.Springmovies.domain.Movie;
+import se.yrgo.Springmovies.domain.MovieSeries;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,17 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getMoviesByGenre(Genre.MovieGenre genre){
         return moviesRepository.findMovieByGenre(genre);
     }
+
+    @Override
+    public List<MovieSeries> getAllMovieSeries() {
+        return null;
+    }
+
+    @Override
+    public void createMovieSeries(MovieSeries movieSeries) {
+
+    }
+
 
     @Override
     public Optional<Movie> getMovie(Long id) {

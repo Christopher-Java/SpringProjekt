@@ -1,13 +1,11 @@
 package se.yrgo.Springmovies.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name="Movie")
 public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,16 +16,25 @@ public class Movie {
     private String description;
     private Genre.MovieGenre genre;
 
-    public Movie(String movieTitle, Date releaseDate, String description, Genre.MovieGenre movieGenre) {
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private MovieSeries movieSeries;
+
+    public Movie(Long id, String movieTitle, Date releaseDate, String description, Genre.MovieGenre genre, MovieSeries movieSeries) {
+        this.id = id;
         this.movieTitle = movieTitle;
         this.releaseDate = releaseDate;
         this.description = description;
-        this.genre = movieGenre;
-
-
+        this.genre = genre;
+        this.movieSeries = movieSeries;
     }
 
+    public MovieSeries getMovieSeries() {
+        return movieSeries;
+    }
 
+    public void setMovieSeries(MovieSeries movieSeries) {
+        this.movieSeries = movieSeries;
+    }
 
     @Override
     public String toString() {
@@ -83,4 +90,6 @@ public class Movie {
     public Long getId() {
         return id;
     }
+
+
 }
