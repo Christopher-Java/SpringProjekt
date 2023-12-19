@@ -23,6 +23,16 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
+    @GetMapping("/deleteRental/{id}")
+    public void deleteRental(@PathVariable Long id ){
+        Optional<Rental> rental = rentalService.findById(id);
+        if (rental.isPresent()) {
+            rentalService.deleteRental(id);
+        } else {
+            System.out.println("Could find rental with that id");
+        }
+    }
+
 
     @GetMapping("/getAllRentals")
     public List<Rental> getAllRentals() {

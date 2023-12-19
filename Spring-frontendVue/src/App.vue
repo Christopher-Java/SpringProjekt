@@ -27,6 +27,7 @@
         <div class="row">
           <!-- Add your featured movie cards here -->
           <MovieList></MovieList>
+          <RentalComponent></RentalComponent>
           
           <!-- Add more movie cards as needed -->
         </div>
@@ -46,13 +47,15 @@
 // eslint-disable-next-line
 import GenreComponent from './components/GenreComponent.vue';
 import MovieList from './components/MovieList.vue';
+import RentalComponent from "@/components/RentalComponent.vue";
 
 export default {
   name: 'App',
   components: {
     // eslint-disable-next-line
     GenreComponent,
-    MovieList
+    MovieList,
+    RentalComponent
   }
 }
 </script>

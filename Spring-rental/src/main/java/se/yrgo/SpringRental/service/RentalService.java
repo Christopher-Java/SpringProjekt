@@ -19,5 +19,7 @@ public interface RentalService {
 
     public List<Rental> findByCustomerId(Long customerId);
 
+    public void deleteRental(Long id);
+
 
 }

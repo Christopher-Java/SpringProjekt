@@ -4,7 +4,7 @@
     <button @click="showAllRentals">Show All Rentals</button>
     <ul>
       <li v-for="rental in rentals" :key="rental.id">
-        {{ getMovieTitle(rental.id) }} - {{ rental.customerId }}
+        {{ rental.movieTitle }} - {{ rental.customerId }}
       </li>
     </ul>
   </div>
@@ -28,7 +28,16 @@ export default {
       try {
         const response = await fetch("http://localhost:8082/rental/getAllRentals");
         if (response.ok) {
-          this.rentals = await response.json();
+          const rentals = await response.json();
+
+          // Fetch movie titles for each rental and include customerId in rental object
+          const fetchTitlePromises = rentals.map(async (rental) => {
+            rental.movieTitle = await this.getMovieTitle(rental.movieId);
+          });
+
+          await Promise.all(fetchTitlePromises);
+
+          this.rentals = rentals;
         } else {
           console.error("Failed to fetch rentals:", response.statusText);
         }
@@ -38,13 +47,20 @@ export default {
     },
 
     async getMovieTitle(id) {
-      const response = await fetch("http://localhost:8081/movies/get-movie-by-id/" + id);
-      if (response.ok) {
-       var movie = await response.json();
-        var movieTitle =await movie.movieTitle;
-        return movieTitle
+      try {
+        const response = await fetch("http://localhost:8081/movies/get-movie-by-id/" + id);
+        if (response.ok) {
+          const movie = await response.json();
+          return movie.movieTitle;
+        } else {
+          console.error("Failed to fetch movie title:", response.statusText);
+          return ""; // Return a default value or handle the error as needed
+        }
+      } catch (error) {
+        console.error("Error fetching movie title:", error);
+        return ""; // Return a default value or handle the error as needed
       }
-    }
+    },
   },
 };
 </script>

@@ -42,4 +42,10 @@ public class RentalServiceImpl implements RentalService {
         return rentalRepository.findCustomerById(customerId);
     }
 
+    @Override
+    public void deleteRental(Long id) {
+        Optional<Rental> rental = rentalRepository.findById(id);
+        rental.ifPresent(rentalRepository::delete);
+    }
+
 }
