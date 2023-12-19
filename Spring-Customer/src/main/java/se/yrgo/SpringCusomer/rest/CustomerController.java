@@ -27,7 +27,6 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    // Additional controller methods for creating, updating, and deleting customers
     @PostMapping("/create-customer")
     public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
