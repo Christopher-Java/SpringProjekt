@@ -56,17 +56,13 @@ export default {
     this.fetchGenres();
   },
   methods: {
-    async rentedMovies() {
+    async rentedMovies() { 
       const response = await fetch("http://localhost:8082/rental/getAllRentals")
-
-      
       return await response.json()
-
-      
     },
     getMovieIdsFromMovieArray(movies){
       var movieIds = []
-      movies.forEach((element) => {
+      movies.forEach((element) => {   // Picks out the movie id from the movie and adds the id to an id array
         movieIds.push(element.movieId)
       })
 
@@ -75,11 +71,13 @@ export default {
 
     async removeRentedMoviesFromList(rawMovies){
       console.log("Removing rented movies from list")
-      let rentedMovieIds = await this.getMovieIdsFromMovieArray(await this.rentedMovies())
+      let rentedMovieIds = await this.getMovieIdsFromMovieArray(await this.rentedMovies()) // Gets the ids of the rented movies
       let availableMovies = []
 
       for (let i = 0; i < rawMovies.length; i++) {
 
+        // Rawmovies is all the movies for a given selection (including already rented movies)
+        // Removes the movies that are already rented by checking if the id exists in the rentedMovieIds
         if (!((rentedMovieIds).includes(rawMovies[i].id))) {
           availableMovies.push(rawMovies[i])
         }
@@ -95,7 +93,7 @@ export default {
 
       let rawMovies = await response.json()
       
-      this.removeRentedMoviesFromList(rawMovies)
+      this.removeRentedMoviesFromList(rawMovies)  // We need to remove the already rented movies, otherwise a customer could hire the same movie more than once
     },
 
     async fetchMoviesByGenre(genre) {
@@ -103,7 +101,7 @@ export default {
       const response = await fetch("http://localhost:8081/movies/get-movies-by-genre/" + genre)
 
       let rawMovies = await response.json()
-      this.removeRentedMoviesFromList(rawMovies)
+      this.removeRentedMoviesFromList(rawMovies)  // See above
     },
 
     async fetchGenres() {
