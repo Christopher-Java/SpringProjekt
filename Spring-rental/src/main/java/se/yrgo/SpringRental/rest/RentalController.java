@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins="*", maxAge = 3600)
 @RestController
 @RequestMapping("/rental")
 public class RentalController {
