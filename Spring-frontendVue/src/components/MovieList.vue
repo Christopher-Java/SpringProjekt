@@ -6,10 +6,10 @@
         <div class="card">
           <!-- You can add images or icons for each genre if available -->
           <div class="card-body">
-            <h5 class="card-title">{{ genre }}</h5>
+            <h5 class="card-title">{{ genre.toUpperCase() }}</h5>
             <p class="card-text">{{ genre.description }}</p>
             <button @click="fetchMoviesByGenre(genre)"> Select </button>
-            
+
           </div>
         </div>
       </div>
@@ -56,27 +56,61 @@ export default {
     this.fetchGenres();
   },
   methods: {
+    async rentedMovies() {
+      const response = await fetch("http://localhost:8082/rental/getAllRentals")
+
+      // eslint-disable-next-line
+      var rentedMovies = []
+      rentedMovies = await response.json()
+
+      var rentedMovieIds = []
+      rentedMovies.forEach((element) => {
+        rentedMovieIds.push(element.movieId)
+      })
+
+      return rentedMovieIds
+    },
+
+    async removeRentedMoviesFromList(rawMovies){
+      console.log("Removing rented movies from list")
+      let rentedMovieIds = await this.rentedMovies()
+      let availableMovies = []
+
+      for (let i = 0; i < rawMovies.length; i++) {
+
+        if (!((rentedMovieIds).includes(rawMovies[i].id))) {
+          availableMovies.push(rawMovies[i])
+        }
+      }
+      this.movies = availableMovies
+    },
+
+
     async fetchMovies() {
+      console.log("Fetching all movies")
       // Make an API call to get the list of movies
       const response = await fetch("http://localhost:8081/movies/get-all-movies")
-      console.log(response)
-      this.movies = await response.json()
-    },
-    async fetchMoviesByGenre(genre){
-      
-      console.log("localhost:8081/movies/get-movies-by-genre/"+genre)
-      const response = await fetch("http://localhost:8081/movies/get-movies-by-genre/"+genre)
 
+      let rawMovies = await response.json()
       
-      this.movies = await response.json()
-      console.log(this.movies)
+      this.removeRentedMoviesFromList(rawMovies)
     },
+
+    async fetchMoviesByGenre(genre) {
+      console.log("Fetching movies in genre: " + genre)
+      const response = await fetch("http://localhost:8081/movies/get-movies-by-genre/" + genre)
+
+      let rawMovies = await response.json()
+      this.removeRentedMoviesFromList(rawMovies)
+    },
+
     async fetchGenres() {
+      console.log("Fetching genres")
       // Make an API call to get the list of genres
       const response = await fetch("http://localhost:8081/movies/get-genres")
-      console.log(response)
       this.genres = await response.json()
     },
+
     async rentMovie(movie) {
       const postData = {
         customerId: this.customerid,
@@ -90,7 +124,7 @@ export default {
       // eslint-disable-next-line
       const requestOptions = {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(postData)
       };
       const response = await fetch("http://localhost:8082/rental/create-rental", requestOptions)
