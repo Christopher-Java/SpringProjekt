@@ -59,21 +59,23 @@ export default {
     async rentedMovies() {
       const response = await fetch("http://localhost:8082/rental/getAllRentals")
 
-      // eslint-disable-next-line
-      var rentedMovies = []
-      rentedMovies = await response.json()
+      
+      return await response.json()
 
-      var rentedMovieIds = []
-      rentedMovies.forEach((element) => {
-        rentedMovieIds.push(element.movieId)
+      
+    },
+    getMovieIdsFromMovieArray(movies){
+      var movieIds = []
+      movies.forEach((element) => {
+        movieIds.push(element.movieId)
       })
 
-      return rentedMovieIds
+      return movieIds
     },
 
     async removeRentedMoviesFromList(rawMovies){
       console.log("Removing rented movies from list")
-      let rentedMovieIds = await this.rentedMovies()
+      let rentedMovieIds = await this.getMovieIdsFromMovieArray(await this.rentedMovies())
       let availableMovies = []
 
       for (let i = 0; i < rawMovies.length; i++) {
@@ -130,6 +132,7 @@ export default {
       const response = await fetch("http://localhost:8082/rental/create-rental", requestOptions)
       const data = await response.json()
       this.postId = data.id
+      
 
     }
   },
