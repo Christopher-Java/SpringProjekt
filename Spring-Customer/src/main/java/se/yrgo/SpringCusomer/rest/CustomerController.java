@@ -1,4 +1,3 @@
-// CustomerController.java
 package se.yrgo.SpringCusomer.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.yrgo.SpringCusomer.domain.Customer;
 import se.yrgo.SpringCusomer.service.CustomerService;
-
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins="*", maxAge = 3600)
 @RestController
@@ -19,15 +18,13 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/get-all-customers")
-    public List<Customer> getAllCustomers(Model model) {
-        return customerService.getAllCustomers(); // Assuming you have a Thymeleaf template named customer-list.html
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
-    @GetMapping("/customers/{customerId}")
-    public String getCustomerById(@PathVariable Long customerId, Model model) {
-        Customer customer = customerService.getCustomerById(customerId);
-        model.addAttribute("customer", customer);
-        return "customer-details"; // Assuming you have a Thymeleaf template named customer-details.html
+    @GetMapping("/get-customer-by-id/{id}")
+    public Optional<Customer> getCustomerById(@PathVariable long id){
+        return customerService.getCustomerById(id);
     }
 
     // Additional controller methods for creating, updating, and deleting customers

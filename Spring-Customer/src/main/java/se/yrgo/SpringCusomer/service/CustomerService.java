@@ -4,11 +4,13 @@ package se.yrgo.SpringCusomer.service;
 import se.yrgo.SpringCusomer.domain.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerService {
     public List<Customer> getAllCustomers();
 
-    public Customer getCustomerById(Long customerId);
+    //public Customer getCustomerById(Long customerId);
+    Optional<Customer> getCustomerById(Long id);
 
     public Customer createCustomer(Customer customer);
 

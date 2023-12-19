@@ -7,6 +7,7 @@ import se.yrgo.SpringCusomer.data.CustomerRepository;
 import se.yrgo.SpringCusomer.domain.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -19,8 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getCustomerById(Long customerId) {
-        return customerRepository.findById(customerId).orElse(null);
+    public Optional<Customer> getCustomerById(Long customerId) {
+        return customerRepository.findByCustomerId(customerId);
     }
 
     @Override
