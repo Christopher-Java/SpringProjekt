@@ -35,3 +35,7 @@ build/
 
 ### Frontend ###
 */node_modules
+.DS_Store
+*.class
+
+Database.mv.db
