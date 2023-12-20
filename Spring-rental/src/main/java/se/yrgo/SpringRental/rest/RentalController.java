@@ -7,7 +7,9 @@ import se.yrgo.SpringRental.domain.Rental;
 import se.yrgo.SpringRental.service.RentalService;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins="*", maxAge = 3600)
@@ -56,9 +58,14 @@ public class RentalController {
 
 
     @PostMapping("/create-rental")
-    public ResponseEntity<String> createRental(@RequestBody Rental rental) {
+    public ResponseEntity<Map<String,Object>> createRental(@RequestBody Rental rental) {
         rentalService.createRental(rental);
-        return ResponseEntity.ok("Rental created successfully" + rental);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Rental created successfully");
+        response.put("Rental", rental);
+
+        return ResponseEntity.ok(response);
     }
 
 

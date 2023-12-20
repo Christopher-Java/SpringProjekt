@@ -8,7 +8,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ genre.toUpperCase() }}</h5>
             <p class="card-text">{{ genre.description }}</p>
-            <button @click="fetchMoviesByGenre(genre)"> Select </button>
+            <button @click="fetchMoviesByGenre(genre)"> Select</button>
 
           </div>
         </div>
@@ -17,10 +17,6 @@
   </div>
   <div>
     <div class="row">
-      <form>
-        <label for="customerId">Your customer ID</label>
-        <input v-model="customerid" class="form-control" id="customerId">
-      </form>
       <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4">
         <div class="card">
           <!-- You can add images or icons for each genre if available -->
@@ -46,7 +42,6 @@ export default {
   data() {
     return {
       movies: [],
-      customerid: null,
       genres: [],
     };
   },
@@ -56,11 +51,11 @@ export default {
     this.fetchGenres();
   },
   methods: {
-    async rentedMovies() { 
+    async rentedMovies() {
       const response = await fetch("http://localhost:8082/rental/getAllRentals")
       return await response.json()
     },
-    getMovieIdsFromMovieArray(movies){
+    getMovieIdsFromMovieArray(movies) {
       var movieIds = []
       movies.forEach((element) => {   // Picks out the movie id from the movie and adds the id to an id array
         movieIds.push(element.movieId)
@@ -69,7 +64,7 @@ export default {
       return movieIds
     },
 
-    async removeRentedMoviesFromList(rawMovies){
+    async removeRentedMoviesFromList(rawMovies) {
       console.log("Removing rented movies from list")
       let rentedMovieIds = await this.getMovieIdsFromMovieArray(await this.rentedMovies()) // Gets the ids of the rented movies
       let availableMovies = []
@@ -92,7 +87,7 @@ export default {
       const response = await fetch("http://localhost:8081/movies/get-all-movies")
 
       let rawMovies = await response.json()
-      
+
       this.removeRentedMoviesFromList(rawMovies)  // We need to remove the already rented movies, otherwise a customer could hire the same movie more than once
     },
 
@@ -112,26 +107,31 @@ export default {
     },
 
     async rentMovie(movie) {
-      const postData = {
-        customerId: this.customerid,
-        movieId: movie.id,
-        rentalCost: 75,
-        rentalDate: currentDate
-      };
-      var currentDate = new Date();
 
-      console.log(this.customerid + " want to hire " + movie.id)
-      // eslint-disable-next-line
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(postData)
-      };
-      const response = await fetch("http://localhost:8082/rental/create-rental", requestOptions)
-      const data = await response.json()
-      this.postId = data.id
-      
+      let customerId = prompt("Please enter your customer id!");
+      if (customerId != null) {
+        const postData = {
+          customerId: customerId,
+          movieId: movie.id,
+          rentalCost: 75,
+          rentalDate: currentDate
+        };
+        var currentDate = new Date();
 
+        console.log(this.customerid + " want to hire " + movie.id)
+        // eslint-disable-next-line
+        const requestOptions = {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(postData)
+        };
+        const response = await fetch("http://localhost:8082/rental/create-rental", requestOptions)
+        const data = await response.json()
+        this.postId = data.id
+
+        await this.fetchMovies();
+        alert("You have rented :" + movie.movieTitle)
+      }
     }
   },
 };
