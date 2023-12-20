@@ -42,7 +42,7 @@ public class MovieServiceImpl2 implements MovieService{
 
     @Override
     public Optional<Movie> getMovie(Long movieId) {
-        return Optional.ofNullable(entityManager.createQuery("SELECT m FROM Movie m INNER JOIN MovieSeries ms ON ms.id=m.id WHERE m.id= :movieId", Movie.class).setParameter("movieId", movieId).getSingleResult());
+        return Optional.ofNullable(entityManager.find(Movie.class, movieId));
     }
 
     @Override
