@@ -109,7 +109,6 @@ export default {
     async rentMovie(movie) {
 
       let customerId = prompt("Please enter your customer id!");
-      console.log(customerId)
       const onlyContainsNumbers = (str) => /^\d+$/.test(str);
       if ((onlyContainsNumbers(customerId))) {
         const postData = {
