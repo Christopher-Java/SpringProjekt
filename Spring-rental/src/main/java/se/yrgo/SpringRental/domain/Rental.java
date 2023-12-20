@@ -1,5 +1,7 @@
 package se.yrgo.SpringRental.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +13,12 @@ public class Rental {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long customerId;
+
     private Long movieId;
     private int rentalCost;
      private Date rentalDate;
+    @NonNull
+    private Long customerId;
 
 
      //Setter and Getters

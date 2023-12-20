@@ -109,7 +109,9 @@ export default {
     async rentMovie(movie) {
 
       let customerId = prompt("Please enter your customer id!");
-      if (customerId != null) {
+      console.log(customerId)
+      const onlyContainsNumbers = (str) => /^\d+$/.test(str);
+      if ((onlyContainsNumbers(customerId))) {
         const postData = {
           customerId: customerId,
           movieId: movie.id,
@@ -131,6 +133,8 @@ export default {
 
         await this.fetchMovies();
         alert("You have rented :" + movie.movieTitle)
+      } else{
+        alert("Invalid input. Use number to enter customerId")
       }
     }
   },
