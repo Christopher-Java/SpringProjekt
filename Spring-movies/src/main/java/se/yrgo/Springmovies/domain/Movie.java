@@ -1,6 +1,8 @@
 package se.yrgo.Springmovies.domain;
 
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -11,9 +13,12 @@ public class Movie {
     @Id
     private Long id;
 
+    @NonNull
     private String movieTitle;
     private Date releaseDate;
     private String description;
+
+    @NonNull
     private Genre.MovieGenre genre;
 
     @ManyToOne(cascade = CascadeType.MERGE)

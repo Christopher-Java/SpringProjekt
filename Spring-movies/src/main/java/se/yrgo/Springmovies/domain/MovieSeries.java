@@ -1,5 +1,7 @@
 package se.yrgo.Springmovies.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import java.util.Set;
 public class MovieSeries {
     @Id
     private Long id;
+    @NonNull
     private String movieSeries;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movieSeries")
     private Set<Movie> movies;
