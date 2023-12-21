@@ -2,26 +2,36 @@ package se.yrgo.SpringRental.domain;
 
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class Rental {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id")
+    private Review review;
+
+
+    private Long customerId;
     private Long movieId;
     private int rentalCost;
-     private Date rentalDate;
-    @NonNull
-    private Long customerId;
+    private Date rentalDate;
 
 
-     //Setter and Getters
+    //Setter and Getters
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
+    }
+
     public Long getId() {
         return id;
     }
