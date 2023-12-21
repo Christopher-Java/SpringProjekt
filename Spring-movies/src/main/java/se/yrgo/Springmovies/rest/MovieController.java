@@ -24,6 +24,14 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    /* Get-all funktionerna undersöker först om det som ska returneras är tomt, isåfall returneras en NOT_FOUND statuskod
+     *  Om inget undantag uppkommer returneras den efterfrågade listan med en OK-statuskod
+     *
+     * GetMovie kollar helt enkelt om den hittar något, annars returneras NOT_FOUND
+     *
+     * Create-funktionerna fångar eventuella undantag och returnerar isåfall ett INTERNAL_SERVER_ERROR
+     * */
+
     @GetMapping("/get-all-movies")
     public ResponseEntity<List<Movie>> getAllMovies() {
         try {
